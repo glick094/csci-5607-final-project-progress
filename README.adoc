@@ -2,7 +2,7 @@
 
 Aaron Glick and Maryam Kameli
 
-== VITPose: Vision Transformers for Human Pose Estimation
+== Animating Human Pose in OpenGL
 
 // This project implements a viewer for VITPose human pose estimation data,
 // with plans to extend to 3D character animation.
@@ -25,7 +25,7 @@ If we have time, we would like to try and improve the overall rendering looking 
 
 == Progress Update
 
-Currently, we have the first goal more or less accomplished. As you can see below, we have plotted the pose from a VITPose dataset, and animates between frames. The blue bar at the bottom allows you to see progression through the video, while SDL is used to control playback speed (up/down arrows) or to jump to the previous/next frame (left/right arrow keys). In the video below, you can see the frame rate speeding up and slowing daow, as we progress through the video. 
+Currently, we have the first goal more or less accomplished. As you can see below, we have plotted the pose from a VITPose dataset, and animates between frames. The blue bar at the bottom allows you to see progression through the video, while SDL is used to control playback speed (up/down arrows) or to jump to the previous/next frame (left/right arrow keys). In the video below, you can see the frame rate speeding up and slowing down, as we progress through the video. 
 
 //image::Preliminary_OpenGL_Rendering.png[]
 video::vitpose_opengl_rendering_2d.mp4[width=600, start=0,opts="autoplay,loop"]
