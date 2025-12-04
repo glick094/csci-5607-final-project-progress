@@ -1,0 +1,35 @@
+= CSCI 5607 Final Project - Progress Report
+
+Aaron Glick and Maryam Kameli
+
+== VITPose: Vision Transformers for Human Pose Estimation
+
+// This project implements a viewer for VITPose human pose estimation data,
+// with plans to extend to 3D character animation.
+
+After discussing some potential ideas, we decided on a project that combined our research interests. Maryam has been working on photorealistic avatars, specifically using diffusion models to generate real human avatars of the whole body and of the face. Aaron has been working on quantifying human motion for clinical applications, and has some interest in deidentifying the video data in these HIPAA protected datasets so that the motor features could be shared. 
+We have decided to animate a human model in OpenGL. Specifically, we want to dive a little deeper into (1) animation in OpenGL, (2) manipulating 3D models for avatars, (3) rendering realistic scenes with movement. 
+
+We plan to implement a 2D version in OpenGL that is similar to a pose estimation model being overlayed on a video, as you can see below (from VITPose++ link:https://www.linkedin.com/posts/niels-rogge-a3b7a3127_excited-to-share-that-vitpose-and-vitpose-activity-7284564857834594304-48bV/[LinkedIn post]). This will essentially plot the pose data directly on top of the rendered video. 
+
+video::vitpose_video.mp4[width=600, start=0,opts="autoplay,loop"]
+
+// https://www.linkedin.com/posts/niels-rogge-a3b7a3127_excited-to-share-that-vitpose-and-vitpose-activity-7284564857834594304-48bV/
+
+Our second goal is to get a 3D model loaded and working (perhaps a premade link:https://studio.blender.org/characters/[character model] from the Blender team) in OpenGL. This extends what we've done for some extra credit in the course, loading OBJ files, to support GLFT files and rigged models. 
+
+Our third goal is to get our 3D model animated in OpenGL, similar to what was done in link:https://github.com/TheThinMatrix/OpenGL-Animation?tab=readme-ov-file[The Thin Matrix], which essentially uses blender to link the vertices with a skeleton, and you manipulate the skeleton in OpenGL. This relates directly to what we've learned in class with animation and resampling, since we would take each frame (or set of keypoints from the pose) as a pose, and interpolate between frames to make the consistent motion between "static" poses. Additionallly, we would like use SDL to control camera position to enable the user to make interesting scenes and angles for the animation produced. 
+
+If we have time, we would like to try and improve the overall rendering looking at lighting, textures, and some secondary motion of clothes or movement. This will make the full rendering a lot more realistic. 
+
+
+== Progress Update
+
+Currently, we have the first goal more or less accomplished. As you can see below, we have plotted the pose from a VITPose dataset, and animates between frames. The blue bar at the bottom allows you to see progression through the video, while SDL is used to control playback speed (up/down arrows) or to jump to the previous/next frame (left/right arrow keys). In the video below, you can see the frame rate speeding up and slowing daow, as we progress through the video. 
+
+//image::Preliminary_OpenGL_Rendering.png[]
+video::vitpose_opengl_rendering_2d.mp4[width=600, start=0,opts="autoplay,loop"]
+
+By the end of the week, we should be able to recreate the 2D version of this with the overlay on top of a video. We anticipate being able to render a moving 3D model that follows along from the input human motion data. 
+
+The two biggest concerns for this project are, first, implementing the rigged model in OpenGL. While it is fairly trivial to render a static frame, we may need some inverse kinematics (IK) solver to interpolate the multiple trajectories of each keypoint to make a realistic approximation of the actual motion between frames, but we are familiar with a number of implementations of FABRIK in C++ available on github. Secondly, our concern during rendering is the balancing the "ground-truth" motion collected from the pose data versus a more animation-inspired style using the 12 priniciples of animation. For different purposes like a scientific perspective, the rendering is meant to capture the exact motion of a real person (for visualization or teleoperation), but we may need to filter, soften, or exaggerate the motion once we put it in OpenGL. We will solve this through trial and error. 
